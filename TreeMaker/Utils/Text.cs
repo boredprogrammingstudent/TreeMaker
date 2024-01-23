@@ -8,25 +8,29 @@ using Raylib_cs;
 using System.Numerics;
 using static TreeMaker.Settings.UserSettings;
 using TreeMaker.Settings;
-
+using Color = Raylib_cs.Color;
 namespace TreeMaker.Utils
 {
     static class Text
     {
+        static readonly Color color = Colors[(int)ColorTypes.Text];
+        public static void Write(string text, int posX, int posY, int textSize)
+        {
+            DrawTextEx(FONT, text, new(posX, posY), textSize, 5, color);
+        }
         public static void WriteCentered(string text, Vector2 topLeft, Vector2 bottomRight, int textSize)
         {
             WriteCentered(text, textSize, topLeft, bottomRight - topLeft);
         }
         public static void WriteCentered(string text, int textSize, Vector2 spacePos, Vector2 spaceSize)
         {
-            int PosX = GetPosX(spacePos.X, spaceSize.X, text, textSize);
-            int PosY = GetPosY(spacePos.Y, spaceSize.Y, textSize);
-            DrawText(text, PosX, PosY, textSize, Colors[(int)ColorTypes.Text]);
-
+            int posX = GetPosX(spacePos.X, spaceSize.X, text, textSize);
+            int posY = GetPosY(spacePos.Y, spaceSize.Y, textSize);
+            Write(text, posX, posY, textSize);
         }
         public static int GetPosX(float spaceX, float spaceWidth, string text, int textSize)
         {
-            return (int)(spaceX - MeasureText(text, textSize) / 2f + spaceWidth / 2f);
+            return (int)(spaceX - MeasureTextEx(FONT,text, textSize, 5).X / 2f + spaceWidth / 2f);
         }
         public static int GetPosY(float spaceY, float spaceHeight, float textSize)
         {
@@ -179,6 +183,45 @@ namespace TreeMaker.Utils
             Languages.French => "Ajouter une image",
             _ => "Add Image"
         };
+        public static string AddRelationship => Language switch
+        {
+            Languages.French => "Ajouter une relation",
+            _ => "Add Relationship"
+        };
+        public static string ChooseRelationship => Language switch
+        {
+            Languages.French => "Choisir le type de relation",
+            _ => "Choose relationship type"
+        };
+        public static string ParentExample => Language switch
+        {
+            Languages.French => $"Par example : si vous ajoutez un père,\nchoisissez l'option {Relationship(Relationships.Parents)}",
+            _ => $"For example : if you're adding a father,\nchoose the option {Relationship(Relationships.Parents)}"
+        };
+        public static string Yes => Language switch
+        {
+            Languages.French => "Oui",
+            _ => "Yes"
+        };
+        public static string No => Language switch
+        {
+            Languages.French => "Non",
+            _ => "No"
+        };
+        public static string DoYouWantToAnInverseRelationship => Language switch
+        {
+            Languages.French => "Voulez-vous ajouter une relation inverse ?",
+            _ => "Do you want to add an inverse relationship ?"
+        };
+        public static string[] GetAllRelationships(bool addOther)
+        {
+            string[] strings = new string[(int)(addOther ? Relationships.Other + 1 : Relationships.Other)];
+            for(int i = 0; i < strings.Length; ++i)
+            {
+                strings[i] = Relationship((Relationships)i);
+            }
+            return strings;
+        }
         public static string Relationship(Relationships rel) => rel switch
         {
             Relationships.Parents => Parents,

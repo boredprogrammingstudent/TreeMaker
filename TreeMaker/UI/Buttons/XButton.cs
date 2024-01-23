@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TreeMaker.Settings;
 using Raylib_cs;
+using static Raylib_cs.Raylib;
 using static TreeMaker.Settings.UserSettings;
 
 namespace TreeMaker.UI.Buttons

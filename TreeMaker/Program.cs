@@ -29,12 +29,13 @@ namespace TreeMaker
                 throw new Exception();
             }
             InitWindow(UserSettings.ScreenWidth, UserSettings.ScreenHeight, "TreeMaker");
+            UserSettings.LoadFonts();
             SetTargetFPS(60);
 
             while (!WindowShouldClose())
             {
                 BeginDrawing();
-                Scene.currScene?.Update();
+                Scene.currScene.Update();
                 EndDrawing();
             }
             UnloadImages.Unload(MainViewScene.People);

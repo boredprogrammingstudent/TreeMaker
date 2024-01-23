@@ -8,6 +8,7 @@ using Raylib_cs;
 using static Raylib_cs.Raylib;
 using System.Numerics;
 using Color = Raylib_cs.Color;
+using Font = Raylib_cs.Font;
 namespace TreeMaker.Settings
 {
     static class UserSettings
@@ -34,6 +35,7 @@ namespace TreeMaker.Settings
                 new Color(0, 0, 0, 255)
             }
         };
+        public static Font FONT;
         public static Vector2 ScreenSize;
         public static int ScreenWidth
         {
@@ -48,6 +50,14 @@ namespace TreeMaker.Settings
         public static void LoadSettings()
         {
             FileReader.ReadFile(SETTINGS, SetSetting);
+            ;
+        }
+        public static void LoadFonts()
+        {
+            FONT = LoadFontEx(@"..\..\..\Resources\Poppins-Medium.ttf", ScreenHeight / 3, new int[]
+            {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','P','q','r','s','t','u','v','w','x','y','z',
+            'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','p','Q','R','S','T','U','V','W','X','Y','Z',
+            '1','2','3','4','5','6','7','8','9','0','.',',',';',':','(',')','-','+','*','=','/','\"','\'','?','!'}, 77);
         }
         static void SetSetting(string setting, string response)
         {

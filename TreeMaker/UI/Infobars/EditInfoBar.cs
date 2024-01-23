@@ -12,6 +12,7 @@ using TreeMaker.Settings;
 using Raylib_cs;
 using Color = Raylib_cs.Color;
 using static TreeMaker.Utils.OpenFileManager;
+using TreeMaker.UI.Popups;
 using TreeMaker.Scenes;
 
 namespace TreeMaker.UI.Infobars
@@ -27,7 +28,6 @@ namespace TreeMaker.UI.Infobars
             Languages.French => 20,
             _ => 30
         };
-        Color color = Colors[(int)ColorTypes.Text];
         InputText firstName;
         InputText lastName;
         InputInt dayOfBirth;
@@ -70,14 +70,14 @@ namespace TreeMaker.UI.Infobars
             AddElem(firstName, lastName, dayOfBirth, monthOfBirth, yearOfBirth, dayOfDeath, monthOfDeath, yearOfDeath);
 
             i = 2 * UI_BUFFER;
-            _firstName = () => DrawText(FirstName, textPosX, i, textSize, color);
-            _lastName = () => DrawText(LastName, textPosX, i + dist, textSize, color);
-            _dayOfBirth = () => DrawText(DayOfBirth, textPosX, i + 2 * dist, textSize, color);
-            _monthOfBirth = () => DrawText(MonthOfBirth, textPosX, i + 3 * dist, textSize, color);
-            _yearOfBirth = () => DrawText(YearOfBirth, textPosX, i + 4 * dist, textSize, color);
-            _dayOfDeath = () => DrawText(DayOfDeath, textPosX, i + 5 * dist, textSize, color);
-            _monthOfDeath = () => DrawText(MonthOfDeath, textPosX, i + 6 * dist, textSize, color);
-            _yearOfDeath = () => DrawText(YearOfDeath, textPosX, i + 7 * dist, textSize, color);
+            _firstName = () => Write(FirstName, textPosX, i, textSize);
+            _lastName = () => Write(LastName, textPosX, i + dist, textSize);
+            _dayOfBirth = () => Write(DayOfBirth, textPosX, i + 2 * dist, textSize);
+            _monthOfBirth = () => Write(MonthOfBirth, textPosX, i + 3 * dist, textSize);
+            _yearOfBirth = () => Write(YearOfBirth, textPosX, i + 4 * dist, textSize);
+            _dayOfDeath = () => Write(DayOfDeath, textPosX, i + 5 * dist, textSize);
+            _monthOfDeath = () => Write(MonthOfDeath, textPosX, i + 6 * dist, textSize);
+            _yearOfDeath = () => Write(YearOfDeath, textPosX, i + 7 * dist, textSize);
             AddPostUpdate(_firstName, _lastName, _dayOfBirth, _monthOfBirth, _yearOfBirth, _dayOfDeath, _monthOfDeath, _yearOfDeath);
 
             AddElem(new InfoBarButton(AddImage, () =>
@@ -90,7 +90,12 @@ namespace TreeMaker.UI.Infobars
                     File.SetAttributes(path, FileAttributes.Normal);
                     person.AddImage(path);
                 }
-            }, i + 9 * dist, Width - 2 * UI_BUFFER, Width / 5));
+            }, i + 9 * dist, Width - 2 * UI_BUFFER, Width / 5), 
+            new InfoBarButton(AddRelationship, () =>
+            {
+                Scene.currScene.SetInactive();
+                Scene.currScene.AddCanvas(new AddRelationshipPopup(person));
+            }, i + 11 * dist, Width - 2 * UI_BUFFER, Width / 5));
 
         }
         public void Save()

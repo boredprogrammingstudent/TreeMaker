@@ -15,26 +15,25 @@ namespace TreeMaker.UI.Infobars
 {
     class ViewInfoBar : InfoBar
     {
-        Color color = Colors[(int)ColorTypes.Text];
         public ViewInfoBar(Person person) : base(person)
         {
             int textSize = Width / 15;
-            AddPreUpdate(() => DrawText(FirstName + " : " + person.FirstName,
-                2 * UI_BUFFER, 2 * UI_BUFFER + 0 * (UI_BUFFER + textSize), textSize, color));
-            AddPreUpdate(() => DrawText(LastName + " : " + person.LastName,
-                2 * UI_BUFFER, 2 * UI_BUFFER + 1 * (UI_BUFFER + textSize), textSize, color));
-            AddPreUpdate(() => DrawText(DayOfBirth + " : " + person.DayOfBirth,
-                2 * UI_BUFFER, 2 * UI_BUFFER + 2 * (UI_BUFFER + textSize), textSize, color));
-            AddPreUpdate(() => DrawText(MonthOfBirth + " : " + person.MonthOfBirth,
-                2 * UI_BUFFER, 2 * UI_BUFFER + 3 * (UI_BUFFER + textSize), textSize, color));
-            AddPreUpdate(() => DrawText(YearOfBirth + " : " + person.YearOfBirth,
-                2 * UI_BUFFER, 2 * UI_BUFFER + 4 * (UI_BUFFER + textSize), textSize, color));
-            AddPreUpdate(() => DrawText(DayOfDeath + " : " + person.DayOfDeath,
-                2 * UI_BUFFER, 2 * UI_BUFFER + 5 * (UI_BUFFER + textSize), textSize, color));
-            AddPreUpdate(() => DrawText(MonthOfDeath + " : " + person.MonthOfDeath,
-                2 * UI_BUFFER, 2 * UI_BUFFER + 6 * (UI_BUFFER + textSize), textSize, color));
-            AddPreUpdate(() => DrawText(YearOfDeath + " : " + person.YearOfDeath,
-                2 * UI_BUFFER, 2 * UI_BUFFER + 7 * (UI_BUFFER + textSize), textSize, color));
+            AddPreUpdate(() => Write(FirstName + " : " + person.FirstName,
+                2 * UI_BUFFER, 2 * UI_BUFFER + 0 * (UI_BUFFER + textSize), textSize));
+            AddPreUpdate(() => Write(LastName + " : " + person.LastName,
+                2 * UI_BUFFER, 2 * UI_BUFFER + 1 * (UI_BUFFER + textSize), textSize));
+            AddPreUpdate(() => Write(DayOfBirth + " : " + person.DayOfBirth,
+                2 * UI_BUFFER, 2 * UI_BUFFER + 2 * (UI_BUFFER + textSize), textSize));
+            AddPreUpdate(() => Write(MonthOfBirth + " : " + person.MonthOfBirth,
+                2 * UI_BUFFER, 2 * UI_BUFFER + 3 * (UI_BUFFER + textSize), textSize));
+            AddPreUpdate(() => Write(YearOfBirth + " : " + person.YearOfBirth,
+                2 * UI_BUFFER, 2 * UI_BUFFER + 4 * (UI_BUFFER + textSize), textSize));
+            AddPreUpdate(() => Write(DayOfDeath + " : " + person.DayOfDeath,
+                2 * UI_BUFFER, 2 * UI_BUFFER + 5 * (UI_BUFFER + textSize), textSize));
+            AddPreUpdate(() => Write(MonthOfDeath + " : " + person.MonthOfDeath,
+                2 * UI_BUFFER, 2 * UI_BUFFER + 6 * (UI_BUFFER + textSize), textSize));
+            AddPreUpdate(() => Write(YearOfDeath + " : " + person.YearOfDeath,
+                2 * UI_BUFFER, 2 * UI_BUFFER + 7 * (UI_BUFFER + textSize), textSize));
             
             Vector2 imagePos = new Vector2(2 * UI_BUFFER, 2 * UI_BUFFER + 12 * (UI_BUFFER + textSize));
             if(person.Images.Count > 0)

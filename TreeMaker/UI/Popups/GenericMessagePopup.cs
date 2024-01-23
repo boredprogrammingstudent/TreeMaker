@@ -18,13 +18,10 @@ namespace TreeMaker.UI.Popups
             AddPreUpdate(() => WriteCentered(message, Vector2.One * PopupBuffer, ScreenSize - Vector2.One * PopupBuffer, textSize));
             AddElem(new PopupButton(2, "OK", () =>
             {
-                if (Scene.currScene != null && Scene.currScene.Canvas != null)
+                Scene.currScene.Canvas = Scene.currScene.Canvas[0..^1];
+                foreach (Canvas canvas in Scene.currScene.Canvas)
                 {
-                    Scene.currScene.Canvas = Scene.currScene.Canvas[0..^1];
-                    foreach(Canvas canvas in  Scene.currScene.Canvas)
-                    {
-                        canvas.IsActive = true;
-                    }
+                    canvas.IsActive = true;
                 }
 
             }));

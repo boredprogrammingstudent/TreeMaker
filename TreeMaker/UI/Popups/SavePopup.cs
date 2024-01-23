@@ -15,7 +15,7 @@ namespace TreeMaker.UI.Popups
         {
             AddPreUpdate(() => WriteCentered(DoYouWannaSave, Width / 40, Vector2.One * PopupBuffer, new(Width, Height / 2)));
             AddElem(
-                    new PopupButton(0, Save, () => 
+                    new PopupButton(0, Save, () =>
                     {
                         onSave();
                     }),
@@ -25,11 +25,8 @@ namespace TreeMaker.UI.Popups
                     }),
                     new PopupButton(2, Cancel, () =>
                     {
-                        if (Scene.currScene != null && Scene.currScene.Canvas != null)
-                        {
-                            Scene.currScene.Canvas = Scene.currScene.Canvas[0..^1];
-                        }
-                        Scene.currScene?.SetActive();
+                        Scene.currScene.Canvas = Scene.currScene.Canvas[0..^1];
+                        Scene.currScene.SetActive();
                     })
                 );
         }

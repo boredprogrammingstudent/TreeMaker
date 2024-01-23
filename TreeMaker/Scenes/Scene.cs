@@ -10,8 +10,9 @@ namespace TreeMaker.Scenes
 {
     abstract class Scene
     {
-        public static Scene? currScene;
-        public Canvas[]? Canvas;
+        static readonly Scene defaultScene = new MainMenuScene();
+        public static Scene currScene = defaultScene;
+        public Canvas[] Canvas = Array.Empty<Canvas>();
         public virtual void Update()
         {
             if (Canvas != null)
@@ -29,6 +30,17 @@ namespace TreeMaker.Scenes
             if (Canvas == null) return;
             foreach (Canvas canvas in Canvas)
                 canvas.IsActive = true;
+        }
+        public void AddCanvas(Canvas canvas)
+        {
+            if(Canvas != null)
+            {
+                Canvas[] newCanvas = new Canvas[Canvas.Length + 1];
+                for (int i = 0; i < Canvas.Length; ++i)
+                    newCanvas[i] = Canvas[i];
+                newCanvas[^1] = canvas;
+                Canvas = newCanvas;
+            }
         }
     }
 }

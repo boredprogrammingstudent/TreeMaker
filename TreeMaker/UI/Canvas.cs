@@ -21,9 +21,9 @@ namespace TreeMaker.UI
             }
         }
         bool isActive;
-        readonly List<UI> Elements = new();
-        readonly List<Action> PreUpdate = new();
-        readonly List<Action> PostUpdate = new();
+        protected readonly List<UI> Elements = new();
+        protected readonly List<Action> PreUpdate = new();
+        protected readonly List<Action> PostUpdate = new();
         public UI this[int i] { get => Elements[i]; set => Elements[i] = value; }
         public void AddElem(params UI[] elements)
         {

@@ -82,10 +82,10 @@ namespace TreeMaker.Utils
                         break;
                     default:
                         if (obj == string.Empty) break;
-                        if (int.TryParse(obj, out int rel))
+                        if (int.TryParse(set, out int rel))
                         {
                             if (rel < 0) throw new InvalidDataException();
-                            person.Relationships.Add(new(set, People[rel]));
+                            person.Relationships.Add(new(obj, People[rel]));
                         }
                         else throw new InvalidDataException();
                         break;
